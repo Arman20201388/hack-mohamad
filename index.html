@@ -268,7 +268,7 @@
             
             "شناسایی آغاز شد.<br>سطح تهدید: متوسط<br>در حال نفوذ به سیستم امنیتی...<br>به فایروال سیستم رسیدیم.<br>برای عبور از فایروال، دستور <span class='text-yellow-300'>ورود به سیستم</span> را وارد کنید.",
             
-            "<span class='warning'>هشدار! هشدار! هشدار!</span><br>سیستم امنیتی فعال شد!<br>شما تنها ۲ دقیقه فرصت دارید قبل از اینکه موقعیت شما کاملا شناسایی شود.<br>با سرعت بیشتری پیش بروید.<br>برای دسترسی به فایل‌های طبقه‌بندی شده، دستور <span class='text-yellow-300'>دسترسی به فایل‌های مخفی</span> را وارد کنید.",
+            "<span class='warning'>هشدار! هشدار! هشدار!</span><br>سیستم امنیتی فعال شد!<br>شما تنها ۲ دقیقه فرصت دارید قبل از اینکه موقعیت شما کاملا شناسایی شود.<br>با سرعت بیشتری پیش بروید.<br>برای دسترسی به فایل‌های طبقه‌بندی شده، دستور <span class='text-yellow-300'>دسترسی به فایل‌ها</span> را وارد کنید.",
             
             "فایل‌های مخفی پیدا شدند.<br><span class='warning'>خطر: </span>فایل‌ها رمزگذاری شده‌اند.<br>عملیات رمزگشایی باید آغاز شود.<br>برای شروع رمزگشایی، دستور <span class='text-yellow-300'>رمزگشایی</span> را وارد کنید.",
             
@@ -333,64 +333,79 @@
         
         // Function to show the birthday surprise
         function showBirthdaySurprise() {
-            alarmSound.pause();
-            commandLine.style.display = 'none';
+    alarmSound.pause();
+    commandLine.style.display = 'none';
+    output.innerHTML = '';
+    
+    // تنظیم استایل output برای پشتیبانی از مرکزسازی
+    output.style.display = 'flex';
+    output.style.justifyContent = 'center';
+    output.style.alignItems = 'center';
+    output.style.height = '100vh'; // ارتفاع کامل صفحه
+    
+    typeText("<span class='warning flicker text-xl'>هشدار: پروتکل امنیتی نقض شد!</span>", output, 100, true)
+        .then(() => {
+            return typeText("<span class='warning text-xl'>در حال اجرای پروتکل خودتخریبی...</span>", output, 100, true);
+        })
+        .then(() => {
+            return new Promise(resolve => setTimeout(resolve, 1500));
+        })
+        .then(() => {
             output.innerHTML = '';
+            return typeText("<span class='flicker text-3xl'>3</span>", output, 100, true);
+        })
+        .then(() => {
+            return new Promise(resolve => setTimeout(resolve, 1000));
+        })
+        .then(() => {
+            output.innerHTML = '';
+            return typeText("<span class='flicker text-3xl'>2</span>", output, 100, true);
+        })
+        .then(() => {
+            return new Promise(resolve => setTimeout(resolve, 1000));
+        })
+        .then(() => {
+            output.innerHTML = '';
+            return typeText("<span class='flicker text-3xl'>1</span>", output, 100, true);
+        })
+        .then(() => {
+            return new Promise(resolve => setTimeout(resolve, 1000));
+        })
+        .then(() => {
+            output.innerHTML = '';
+            output.style.display = 'flex'; // اطمینان از اعمال فلکس‌باکس
+            birthdaySound.play();
             
-            typeText("<span class='warning flicker text-xl'>هشدار: پروتکل امنیتی نقض شد!</span>", output, 100, true)
-                .then(() => {
-                    return typeText("<span class='warning text-xl'>در حال اجرای پروتکل خودتخریبی...</span>", output, 100, true);
-                })
-                .then(() => {
-                    return new Promise(resolve => setTimeout(resolve, 1500));
-                })
-                .then(() => {
-                    output.innerHTML = '';
-                    return typeText("<span class='flicker text-3xl'>3</span>", output, 100, true);
-                })
-                .then(() => {
-                    return new Promise(resolve => setTimeout(resolve, 1000));
-                })
-                .then(() => {
-                    output.innerHTML = '';
-                    return typeText("<span class='flicker text-3xl'>2</span>", output, 100, true);
-                })
-                .then(() => {
-                    return new Promise(resolve => setTimeout(resolve, 1000));
-                })
-                .then(() => {
-                    output.innerHTML = '';
-                    return typeText("<span class='flicker text-3xl'>1</span>", output, 100, true);
-                })
-                .then(() => {
-                    return new Promise(resolve => setTimeout(resolve, 1000));
-                })
-                .then(() => {
-                    output.innerHTML = '';
-                    birthdaySound.play();
-                    
-                    const birthdayContainer = document.createElement('div');
-                    birthdayContainer.className = 'birthday-container';
-                    
-                    const cakeEmoji = document.createElement('div');
-                    cakeEmoji.className = 'cake';
-                    cakeEmoji.textContent = '☠';
-                    
-                    const message = document.createElement('div');
-                    message.className = 'final-message text-4xl mb-4';
-                    message.innerHTML = "!تولدت مبارک!";
-                    
-                    const subMessage = document.createElement('div');
-                    subMessage.className = 'text-xl mb-8';
-                    subMessage.innerHTML = "تولدت مبارک باشه داداش از طرف وهاب";
-                    
-                    birthdayContainer.appendChild(cakeEmoji);
-                    birthdayContainer.appendChild(message);
-                    birthdayContainer.appendChild(subMessage);
-                    
-                    output.appendChild(birthdayContainer);
-                });
-        }
+            const birthdayContainer = document.createElement('div');
+            birthdayContainer.className = 'birthday-container';
+            // اضافه کردن استایل‌های مرکزسازی به کانتینر اصلی
+            birthdayContainer.style.display = 'flex';
+            birthdayContainer.style.flexDirection = 'column';
+            birthdayContainer.style.justifyContent = 'center';
+            birthdayContainer.style.alignItems = 'center';
+            birthdayContainer.style.width = '100%';
+            birthdayContainer.style.textAlign = 'center';
+            
+            const cakeEmoji = document.createElement('div');
+            cakeEmoji.className = 'cake';
+            cakeEmoji.textContent = '☠';
+            
+            const message = document.createElement('div');
+            message.className = 'final-message text-4xl mb-4';
+            message.innerHTML = "!تولدت مبارک!";
+            
+            const subMessage = document.createElement('div');
+            subMessage.className = 'text-xl mb-8';
+            subMessage.innerHTML = "تولدت مبارک باشه داداش از طرف وهاب";
+            
+            birthdayContainer.appendChild(cakeEmoji);
+            birthdayContainer.appendChild(message);
+            birthdayContainer.appendChild(subMessage);
+            
+            output.appendChild(birthdayContainer);
+        });
+}
+
         
         // Event listener for command input
         commandInput.addEventListener('keydown', function(e) {
